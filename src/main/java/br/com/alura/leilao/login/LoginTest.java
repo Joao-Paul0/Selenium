@@ -9,22 +9,26 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class LoginTest {
     public static final String URL_LOGIN = "http://localhost:8080/login";
     private WebDriver browser;
+
     // roda uma única vez
     @BeforeAll
     public static void beforeAll() {
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
     }
+
     // roda antes dos método
     @BeforeEach
     public void beforeEach() {
-        this.browser= new ChromeDriver();
+        this.browser = new ChromeDriver();
         browser.navigate().to(URL_LOGIN);
     }
+
     // roda depois dos método
     @AfterEach
-    public void afterEach(){
+    public void afterEach() {
         this.browser.quit();
     }
+
     @Test
     public void deveriaEfetuarLoginComDadosValidos() {
         browser.findElement(By.id("username")).sendKeys("fulano");
@@ -32,7 +36,7 @@ public class LoginTest {
         browser.findElement(By.id("login-form")).submit();
 
         Assertions.assertNotEquals("http://localhost:8080/login", browser.getCurrentUrl());
-        Assertions.assertEquals("fulano",browser.findElement(By.id("usuario-logado")).getText());
+        Assertions.assertEquals("fulano", browser.findElement(By.id("usuario-logado")).getText());
     }
 
     @Test
@@ -46,5 +50,15 @@ public class LoginTest {
         Assertions.assertTrue(browser.getPageSource().contains("Usuário e senha inválidos."));
         Assertions.assertThrows(NoSuchElementException.class, () -> browser.findElement(By.id("usuario-logado")));
     }
+
+    @Test
+    public void naoDeveriaAcessarPaginaRestritaSemEstarLogado() {
+        this.browser.navigate().to("http://localhost:8080/leiloes/2");
+
+        Assertions.assertTrue(browser.getCurrentUrl().contains("http://localhost:8080/login"));
+        // não deve conter na página leilao este titulo
+        Assertions.assertFalse(browser.getPageSource().contains("Dados do Leilão"));
+    }
+
 
 }
