@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginPage {
     public static final String URL_LOGIN = "http://localhost:8080/login";
+    public static final String URL_LANCES = "http://localhost:8080/leiloes/2";
     private final WebDriver BROWSER;
 
     public LoginPage() {
@@ -41,7 +42,7 @@ public class LoginPage {
     }
 
     public void navegarParaPaginaDeLances() {
-        this.BROWSER.navigate().to("http://localhost:8080/leiloes/2");
+        this.BROWSER.navigate().to(URL_LANCES);
     }
 
     public boolean contemTexto(String texto) {
