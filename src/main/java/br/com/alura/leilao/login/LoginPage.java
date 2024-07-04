@@ -1,5 +1,6 @@
 package br.com.alura.leilao.login;
 
+import br.com.alura.leilao.leiloes.LeiloesPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -25,8 +26,11 @@ public class LoginPage {
         this.BROWSER.findElement(By.id("password")).sendKeys(password);
     }
 
-    public void efetuaLogin() {
+    // estou na página de login, mas quero ir para página de leilões.
+    // ao clicar no botão, troca para outra página, de leilões.
+    public LeiloesPage efetuaLogin() {
         this.BROWSER.findElement(By.id("login-form")).submit();
+        return new LeiloesPage(this.BROWSER);
     }
 
     public boolean isPaginaDeLogin() {
