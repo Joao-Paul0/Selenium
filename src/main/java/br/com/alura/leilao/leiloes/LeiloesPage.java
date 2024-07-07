@@ -21,7 +21,7 @@ public class LeiloesPage {
         this.BROWSER.navigate().to(URL_CADASTRO_LEILAO);
         return new CadastroLeilaoPage(this.BROWSER);
     }
-
+    // Valida os dados na tabela leilões, na última coluna.
     public boolean isLeilaoCadastrado(String nome, String valor, String data) {
         WebElement linhaDaTabela = this.BROWSER.findElement(By.cssSelector("#tabela-leiloes tbody tr:last-child"));
         WebElement colunaNome = linhaDaTabela.findElement(By.cssSelector("td:nth-child(1)"));
