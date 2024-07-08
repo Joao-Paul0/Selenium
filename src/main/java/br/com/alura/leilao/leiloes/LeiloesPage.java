@@ -5,7 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LeiloesPage {
-    public static final String URL_CADASTRO_LEILAO = "http://localhost:8080/leiloes/new";
+    private static final String URL_CADASTRO_LEILAO = "http://localhost:8080/leiloes/new";
+    private static final String URL_LEILOES = "http://localhost:8080/leiloes";
     private final WebDriver BROWSER;
 
     public LeiloesPage(WebDriver browser) {
@@ -28,5 +29,9 @@ public class LeiloesPage {
         WebElement colunaDataAbertura = linhaDaTabela.findElement(By.cssSelector("td:nth-child(2)"));
         WebElement colunaValorInicial = linhaDaTabela.findElement(By.cssSelector("td:nth-child(3)"));
         return colunaNome.getText().equals(nome) && colunaDataAbertura.getText().equals(data) && colunaValorInicial.getText().equals(valor);
+    }
+
+    public boolean isPaginaAtual() {
+        return this.BROWSER.getCurrentUrl().contains(URL_LEILOES);
     }
 }
