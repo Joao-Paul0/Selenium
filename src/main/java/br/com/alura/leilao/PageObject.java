@@ -3,6 +3,8 @@ package br.com.alura.leilao;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class PageObject {
     // pra poder acessar as classes filhas.
     protected WebDriver browser;
@@ -16,6 +18,10 @@ public class PageObject {
         } else {
             this.browser = browser;
         }
+        this.browser.manage().timeouts()
+                .implicitlyWait(5, TimeUnit.SECONDS) // tempo de espera quando o selenium for buscar algum elemento na página.
+                .pageLoadTimeout(10, TimeUnit.SECONDS); // tempo de espera da página.
+
     }
 
     public void fechar() {
